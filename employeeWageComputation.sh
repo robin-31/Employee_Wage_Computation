@@ -3,17 +3,20 @@
 isPartTime=1
 isFullTime=2
 empRate_PER_HOUR=20
-tempval=$((RANDOM%3))
-if [ $isFullTime -eq $tempval ]
-then
-	echo "employee is present"
-	workingHrs=8
-elif [ $isPartTime -eq $tempval ]
-	then
+empType=$((RANDOM%3))
+case $empType in
+	$isFullTime)
+		echo "employee is present"
+		workingHrs=8
+		;;
+	$isPartTime)
 		echo "employee is partime"
 		workingHrs=4
-else
-	echo "employee is absent"
-fi
+		;;
+	*)
+		echo "employee is absent"
+		workingHrs=0
+		;;
+esac
 dailyWage=$(($workingHrs * $empRate_PER_HOUR))
 echo $dailyWage
