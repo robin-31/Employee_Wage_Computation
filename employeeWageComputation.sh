@@ -37,9 +37,11 @@ do
 	empType=$(( RANDOM%3 ))
 	workingHrs="$( getworkingHrs $empType )"
 	totalWorkingHrs=$(( $totalWorkingHrs + $workingHrs ))
-	dailyWage[ "DAY: $totalWorkingDays"]=$( getDailyWage $workingHrs )
+	totalSalary=$(( $totalWorkingHrs * $EMP_RATE_PER_HRS ))
+
+	dailyWage[ "DAY: $totalWorkingDays"]="$( getDailyWage $workingHrs ) $totalSalary"
 done
-totalSalary=$(( $totalWorkingHrs * $EMP_RATE_PER_HRS ))
+#totalSalary=$(( $totalWorkingHrs * $EMP_RATE_PER_HRS ))
 echo ${!dailyWage[@]}
 echo ${dailyWage[@]}
 
